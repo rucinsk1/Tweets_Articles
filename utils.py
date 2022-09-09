@@ -8,10 +8,6 @@ import string
 from os.path import exists
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
-from nltk.stem import PorterStemmer
-from nltk.stem import WordNetLemmatizer
 
 DATA_FILENAME_FORMAT = "data/{}.csv"
 STOP_WORDS = set(stopwords.words('english'))
