@@ -8,6 +8,7 @@ import string
 from os.path import exists
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import os
 
 DATA_FILENAME_FORMAT = "data/{}.csv"
 STOP_WORDS = set(stopwords.words('english'))
@@ -24,7 +25,7 @@ def load_data(csv_filename : str, columns : Optional[List[str]] = None) -> pd.Da
         raise FileNotFoundError(f"There is no file {filepath}")
 
 def preprocess_tweet_text(tweet : pd.Series) -> pd.Series:
-    tweet.lower()
+    tweet = tweet.lower()
     # Remove urls
     tweet = re.sub(r"http\S+|www\S+|https\S+", '', tweet, flags=re.MULTILINE)
     # Remove user @ references and '#' from tweet
@@ -39,6 +40,6 @@ def preprocess_tweet_text(tweet : pd.Series) -> pd.Series:
 
 def delete_columns(df : pd.DataFrame, columns : List[str]) -> pd.DataFrame:
     if set(columns).issubset(df.columns):
-        return df.drop(columns = ["id", "date", "query", "user"])      
+        return df.drop(columns = columns)      
     else:
         raise Exception("Cannot delete columns that are not in dataframe!")
